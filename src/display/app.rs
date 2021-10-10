@@ -1,12 +1,10 @@
 use crate::util::{StatefulList, TabsState};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::{error::Error, fs};
-
-const RAW_NODES: [&str; 2] = ["United States", "Norway"];
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Nodes {
+pub struct RawNodes {
     pub data: Data,
 }
 
@@ -23,11 +21,31 @@ pub struct AggregateByCountry {
     pub count: i64,
 }
 
-fn read_node_data() -> Result<Nodes, Box<dyn Error>> {
+type Nodes = Vec<Node>;
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Node {
+    pub name: String,
+    // #[serde(rename = "country_code")]
+    pub country_code: String,
+    pub capital: String,
+    pub count: u64,
+    pub coordinates: Vec<f64>,
+}
+
+pub fn read_node_data() -> Result<RawNodes, Box<dyn Error>> {
     let data = fs::read_to_string("nodes.json")?;
-    let nodes: Nodes = serde_json::from_str(&data)?;
+    let nodes: RawNodes = serde_json::from_str(&data)?;
 
     Ok(nodes)
+}
+
+pub fn read_node_countries() -> Result<Vec<String>, Box<dyn Error>> {
+    let data = fs::read_to_string("node_countries.json")?;
+    let node_countries: Vec<String> = serde_json::from_str(&data)?;
+
+    Ok(node_countries)
 }
 
 pub struct Server<'a> {
@@ -43,66 +61,32 @@ pub struct App<'a> {
     pub tabs: TabsState<'a>,
     pub show_chart: bool,
     pub raw_nodes: StatefulList<&'a str>,
-    pub servers: Vec<Server<'a>>,
-    pub nodes: Vec<AggregateByCountry>,
+    pub nodes: Vec<Node>,
     pub enhanced_graphics: bool,
 }
 
 impl<'a> App<'a> {
-    pub fn new(title: &'a str, enhanced_graphics: bool) -> App<'a> {
+    pub fn new(title: &'a str, enhanced_graphics: bool, node_countries: Vec<&'a str>) -> App<'a> {
         App {
             title,
             should_quit: false,
             tabs: TabsState::new(vec!["map", "list"]),
             show_chart: true,
-            raw_nodes: StatefulList::with_items(RAW_NODES.to_vec()),
-            nodes: vec![],
-            servers: vec![
-                Server {
-                    name: "NorthAmerica-1",
-                    location: "New York City",
-                    coords: (40.71, -74.00),
-                    status: "Up",
-                },
-                Server {
-                    name: "Europe-1",
-                    location: "Paris",
-                    coords: (48.85, 2.35),
-                    status: "Failure",
-                },
-                Server {
-                    name: "SouthAmerica-1",
-                    location: "São Paulo",
-                    coords: (-23.54, -46.62),
-                    status: "Up",
-                },
-                Server {
-                    name: "Asia-1",
-                    location: "Singapore",
-                    coords: (1.35, 103.86),
-                    status: "Up",
-                },
-            ],
-            enhanced_graphics,
-        }
-    }
-
-    pub fn new_nodes(title: &'a str, enhanced_graphics: bool) -> App<'a> {
-        App {
-            title,
-            should_quit: false,
-            tabs: TabsState::new(vec!["map", "list"]),
-            show_chart: true,
-            raw_nodes: StatefulList::with_items(RAW_NODES.to_vec()),
-            servers: vec![],
+            raw_nodes: StatefulList::with_items(node_countries),
             nodes: vec![
-                AggregateByCountry {
-                    name: String::from("United States"),
+                Node {
+                    name: "United States".to_string(),
+                    country_code: "US".to_string(),
+                    capital: "Washington, DC".to_string(),
                     count: 950,
+                    coordinates: vec![38.0, -97.0],
                 },
-                AggregateByCountry {
-                    name: String::from("Norway"),
-                    count: 8,
+                Node {
+                    name: "United Kingdom".to_string(),
+                    country_code: "GB".to_string(),
+                    capital: "London".to_string(),
+                    count: 500,
+                    coordinates: vec![54.0, -2.0],
                 },
             ],
             enhanced_graphics,

@@ -3,7 +3,7 @@ mod display;
 mod util;
 
 use crate::{
-    display::{ui, App},
+    display::{read_node_countries, read_node_data, ui, App},
     util::event::{Event, Events},
 };
 use argh::FromArgs;
@@ -14,9 +14,6 @@ use tui::{backend::TermionBackend, Terminal};
 /// Termion demo
 #[derive(Debug, FromArgs)]
 struct Cli {
-    /// time in ms between two ticks.
-    #[argh(option, default = "250")]
-    tick_rate: u64,
     /// whether unicode symbols are used to improve the overall look of the app
     #[argh(option, default = "true")]
     enhanced_graphics: bool,
@@ -33,9 +30,15 @@ fn main() -> Result<(), Box<dyn Error>> {
     let backend = TermionBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    // let mut app = App::new("nodewatch", cli.enhanced_graphics);
-    let mut app = App::new_nodes("nodewatch", cli.enhanced_graphics);
-    // app.print_nodes();
+    let node_countries: Vec<String> = read_node_countries()?;
+
+    let node_countries_literal = node_countries
+        .iter()
+        .map(|country| country.as_str())
+        .collect::<Vec<&str>>();
+
+    let mut app = App::new("nodewatch", cli.enhanced_graphics, node_countries_literal);
+    // let mut app = App::new_nodes("nodewatch", cli.enhanced_graphics, node_countries_literal);
     loop {
         terminal.draw(|f| ui::draw(f, &mut app))?;
 

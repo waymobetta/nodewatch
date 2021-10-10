@@ -41,28 +41,20 @@ where
         .direction(Direction::Horizontal)
         .split(area);
     let up_style = Style::default().fg(Color::Green);
-    let failure_style = Style::default()
-        .fg(Color::Red)
-        .add_modifier(Modifier::RAPID_BLINK | Modifier::CROSSED_OUT);
-    let rows = app.servers.iter().map(|s| {
-        let style = if s.status == "Up" {
-            up_style
-        } else {
-            failure_style
-        };
-        Row::new(vec![s.name, s.location, s.status]).style(style)
+    let rows = app.nodes.iter().map(|n| {
+        Row::new(vec![n.name.clone(), n.capital.clone(), n.count.to_string()]).style(up_style)
     });
     let table = Table::new(rows)
         .header(
-            Row::new(vec!["node", "location", "status"])
+            Row::new(vec!["name", "capital", "count"])
                 .style(Style::default().fg(Color::Yellow))
                 .bottom_margin(1),
         )
         .block(Block::default().title("nodes").borders(Borders::ALL))
         .widths(&[
-            Constraint::Length(15),
-            Constraint::Length(15),
-            Constraint::Length(10),
+            Constraint::Length(20),
+            Constraint::Length(20),
+            Constraint::Length(20),
         ]);
     f.render_widget(table, chunks[0]);
 
@@ -73,32 +65,20 @@ where
                 color: Color::White,
                 resolution: MapResolution::High,
             });
-            ctx.layer();
-            ctx.draw(&Rectangle {
-                x: 0.0,
-                y: 30.0,
-                width: 10.0,
-                height: 10.0,
-                color: Color::Yellow,
-            });
-            for (i, s1) in app.servers.iter().enumerate() {
-                for s2 in &app.servers[i + 1..] {
+            // ctx.layer();
+            for (i, n1) in app.nodes.iter().enumerate() {
+                for n2 in &app.nodes[i + 1..] {
                     ctx.draw(&Line {
-                        x1: s1.coords.1,
-                        y1: s1.coords.0,
-                        y2: s2.coords.0,
-                        x2: s2.coords.1,
+                        x1: n1.coordinates[1],
+                        y1: n1.coordinates[0],
+                        y2: n2.coordinates[0],
+                        x2: n2.coordinates[1],
                         color: Color::Yellow,
                     });
                 }
             }
-            for server in &app.servers {
-                let color = if server.status == "Up" {
-                    Color::Green
-                } else {
-                    Color::Red
-                };
-                ctx.print(server.coords.1, server.coords.0, "X", color);
+            for node in &app.nodes {
+                ctx.print(node.coordinates[1], node.coordinates[0], "X", Color::Green);
             }
         })
         .marker(if app.enhanced_graphics {
@@ -120,16 +100,15 @@ where
         .constraints([Constraint::Percentage(100)].as_ref())
         .split(area);
 
-    // Iterate through all elements in the `items` app and append some debug text to it.
-    // Draw tasks
-    let tasks: Vec<ListItem> = app
+    // draw raw_nodes list
+    let raw_nodes: Vec<ListItem> = app
         .raw_nodes
         .items
         .iter()
         .map(|i| ListItem::new(vec![Spans::from(Span::raw(*i))]))
         .collect();
-    let tasks = List::new(tasks)
+    let raw_nodes = List::new(raw_nodes)
         .block(Block::default().borders(Borders::ALL).title("nodes"))
         .highlight_style(Style::default().add_modifier(Modifier::BOLD));
-    f.render_stateful_widget(tasks, chunks[0], &mut app.raw_nodes.state);
+    f.render_stateful_widget(raw_nodes, chunks[0], &mut app.raw_nodes.state);
 }

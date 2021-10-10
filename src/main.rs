@@ -11,7 +11,6 @@ use std::{error::Error, io};
 use termion::{event::Key, input::MouseTerminal, raw::IntoRawMode, screen::AlternateScreen};
 use tui::{backend::TermionBackend, Terminal};
 
-/// Termion demo
 #[derive(Debug, FromArgs)]
 struct Cli {
     /// whether unicode symbols are used to improve the overall look of the app
@@ -38,7 +37,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .collect::<Vec<&str>>();
 
     let mut app = App::new("nodewatch", cli.enhanced_graphics, node_countries_literal);
-    // let mut app = App::new_nodes("nodewatch", cli.enhanced_graphics, node_countries_literal);
     loop {
         terminal.draw(|f| ui::draw(f, &mut app))?;
 

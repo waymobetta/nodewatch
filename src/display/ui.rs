@@ -46,7 +46,7 @@ where
     });
     let table = Table::new(rows)
         .header(
-            Row::new(vec!["name", "capital", "count"])
+            Row::new(vec!["location", "capital", "count"])
                 .style(Style::default().fg(Color::Yellow))
                 .bottom_margin(1),
         )

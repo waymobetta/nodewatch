@@ -11,6 +11,7 @@ use std::{error::Error, io};
 use termion::{event::Key, input::MouseTerminal, raw::IntoRawMode, screen::AlternateScreen};
 use tui::{backend::TermionBackend, Terminal};
 
+/// CLI
 #[derive(Debug, FromArgs)]
 struct Cli {
     /// whether unicode symbols are used to improve the overall look of the app

@@ -23,7 +23,7 @@ pub struct AggregateByCountry {
 
 type Nodes = Vec<Node>;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Node {
     pub name: String,
@@ -34,9 +34,9 @@ pub struct Node {
     pub coordinates: Vec<f64>,
 }
 
-pub fn read_node_data() -> Result<RawNodes, Box<dyn Error>> {
+pub fn read_node_data() -> Result<Nodes, Box<dyn Error>> {
     let data = fs::read_to_string("nodes.json")?;
-    let nodes: RawNodes = serde_json::from_str(&data)?;
+    let nodes: Nodes = serde_json::from_str(&data)?;
 
     Ok(nodes)
 }
@@ -46,13 +46,6 @@ pub fn read_node_countries() -> Result<Vec<String>, Box<dyn Error>> {
     let node_countries: Vec<String> = serde_json::from_str(&data)?;
 
     Ok(node_countries)
-}
-
-pub struct Server<'a> {
-    pub name: &'a str,
-    pub location: &'a str,
-    pub coords: (f64, f64),
-    pub status: &'a str,
 }
 
 pub struct App<'a> {
@@ -91,14 +84,6 @@ impl<'a> App<'a> {
             ],
             enhanced_graphics,
         }
-    }
-
-    pub fn on_up(&mut self) {
-        self.raw_nodes.previous();
-    }
-
-    pub fn on_down(&mut self) {
-        self.raw_nodes.next();
     }
 
     pub fn on_right(&mut self) {

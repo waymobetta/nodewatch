@@ -5,7 +5,7 @@ use tui::{
     style::{Color, Modifier, Style},
     symbols,
     text::{Span, Spans},
-    widgets::canvas::{Canvas, Line, Map, MapResolution, Rectangle},
+    widgets::canvas::{Canvas, Line, Map, MapResolution},
     widgets::{Block, Borders, List, ListItem, Row, Table, Tabs},
     Frame,
 };

@@ -21,13 +21,13 @@ pub struct AggregateByCountry {
     pub count: i64,
 }
 
-type Nodes = Vec<Node>;
+pub type Nodes = Vec<Node>;
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Node {
     pub name: String,
-    // #[serde(rename = "country_code")]
+    #[serde(rename = "country_code")]
     pub country_code: String,
     pub capital: String,
     pub count: u64,
@@ -59,29 +59,19 @@ pub struct App<'a> {
 }
 
 impl<'a> App<'a> {
-    pub fn new(title: &'a str, enhanced_graphics: bool, node_countries: Vec<&'a str>) -> App<'a> {
+    pub fn new(
+        title: &'a str,
+        enhanced_graphics: bool,
+        nodes: Vec<Node>,
+        node_names: Vec<&'a str>,
+    ) -> App<'a> {
         App {
             title,
             should_quit: false,
             tabs: TabsState::new(vec!["map", "list"]),
             show_chart: true,
-            raw_nodes: StatefulList::with_items(node_countries),
-            nodes: vec![
-                Node {
-                    name: "United States".to_string(),
-                    country_code: "US".to_string(),
-                    capital: "Washington, DC".to_string(),
-                    count: 950,
-                    coordinates: vec![38.0, -97.0],
-                },
-                Node {
-                    name: "United Kingdom".to_string(),
-                    country_code: "GB".to_string(),
-                    capital: "London".to_string(),
-                    count: 500,
-                    coordinates: vec![54.0, -2.0],
-                },
-            ],
+            raw_nodes: StatefulList::with_items(node_names),
+            nodes: nodes,
             enhanced_graphics,
         }
     }

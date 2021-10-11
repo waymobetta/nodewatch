@@ -1,9 +1,10 @@
+#![allow(unused_imports)]
+#![allow(dead_code)]
 mod display;
-#[allow(dead_code)]
 mod util;
 
 use crate::{
-    display::{read_node_countries, read_node_data, ui, App},
+    display::{read_node_data, ui, App, Node, Nodes},
     util::event::{Event, Events},
 };
 use argh::FromArgs;
@@ -30,14 +31,25 @@ fn main() -> Result<(), Box<dyn Error>> {
     let backend = TermionBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    let node_countries: Vec<String> = read_node_countries()?;
+    // fetch node data
+    let nodes: Nodes = read_node_data()?;
 
-    let node_countries_literal = node_countries
+    /*
+    let node_names = nodes
         .iter()
-        .map(|country| country.as_str())
+        .map(|node: &Node| node.name.as_str())
         .collect::<Vec<&str>>();
+    */
 
-    let mut app = App::new("nodewatch", cli.enhanced_graphics, node_countries_literal);
+    let node_names: Vec<&str> = Vec::new();
+
+    let mut app = App::new(
+        "nodewatch",
+        cli.enhanced_graphics,
+        nodes,
+        node_names.to_vec(),
+    );
+
     loop {
         terminal.draw(|f| ui::draw(f, &mut app))?;
 

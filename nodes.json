@@ -1,0 +1,592 @@
+[
+    {
+        "name": "Argentina",
+        "country_code": "AR",
+        "capital": "Buenos Aires",
+        "count": 1,
+        "coordinates": [
+            -34.0,
+            -64.0
+        ]
+    },
+    {
+        "name": "Australia",
+        "country_code": "AU",
+        "capital": "Canberra",
+        "count": 83,
+        "coordinates": [
+            -27.0,
+            133.0
+        ]
+    },
+    {
+        "name": "Austria",
+        "country_code": "AT",
+        "capital": "Vienna",
+        "count": 39,
+        "coordinates": [
+            47.33333333,
+            13.33333333
+        ]
+    },
+    {
+        "name": "Belgium",
+        "country_code": "BE",
+        "capital": "Brussels",
+        "count": 28,
+        "coordinates": [
+            50.83333333,
+            4.0
+        ]
+    },
+    {
+        "name": "Bulgaria",
+        "country_code": "BG",
+        "capital": "Sofia",
+        "count": 8,
+        "coordinates": [
+            43.0,
+            25.0
+        ]
+    },
+    {
+        "name": "Bosnia and Herzegovina",
+        "country_code": "BA",
+        "capital": "Sarajevo",
+        "count": 1,
+        "coordinates": [
+            44.0,
+            18.0
+        ]
+    },
+    {
+        "name": "Brazil",
+        "country_code": "BR",
+        "capital": "Brasília",
+        "count": 6,
+        "coordinates": [
+            -10.0,
+            -55.0
+        ]
+    },
+    {
+        "name": "Canada",
+        "country_code": "CA",
+        "capital": "Ottawa",
+        "count": 102,
+        "coordinates": [
+            60.0,
+            -95.0
+        ]
+    },
+    {
+        "name": "Switzerland",
+        "country_code": "CH",
+        "capital": "Bern",
+        "count": 44,
+        "coordinates": [
+            47.0,
+            8.0
+        ]
+    },
+    {
+        "name": "China",
+        "country_code": "CN",
+        "capital": "Beijing",
+        "count": 27,
+        "coordinates": [
+            35.0,
+            105.0
+        ]
+    },
+    {
+        "name": "Colombia",
+        "country_code": "CO",
+        "capital": "Bogotá",
+        "count": 1,
+        "coordinates": [
+            4.0,
+            -72.0
+        ]
+    },
+    {
+        "name": "Germany",
+        "country_code": "DE",
+        "capital": "Berlin",
+        "count": 821,
+        "coordinates": [
+            51.0,
+            9.0
+        ]
+    },
+    {
+        "name": "Denmark",
+        "country_code": "DK",
+        "capital": "Copenhagen",
+        "count": 4,
+        "coordinates": [
+            56.0,
+            10.0
+        ]
+    },
+    {
+        "name": "Spain",
+        "country_code": "ES",
+        "capital": "Madrid",
+        "count": 30,
+        "coordinates": [
+            40.0,
+            -4.0
+        ]
+    },
+    {
+        "name": "Estonia",
+        "country_code": "EE",
+        "capital": "Tallinn",
+        "count": 4,
+        "coordinates": [
+            59.0,
+            26.0
+        ]
+    },
+    {
+        "name": "Finland",
+        "country_code": "FI",
+        "capital": "Helsinki",
+        "count": 256,
+        "coordinates": [
+            64.0,
+            26.0
+        ]
+    },
+    {
+        "name": "France",
+        "country_code": "FR",
+        "capital": "Paris",
+        "count": 561,
+        "coordinates": [
+            46.0,
+            2.0
+        ]
+    },
+    {
+        "name": "United Kingdom",
+        "country_code": "GB",
+        "capital": "London",
+        "count": 88,
+        "coordinates": [
+            54.0,
+            -2.0
+        ]
+    },
+    {
+        "name": "Greece",
+        "country_code": "GR",
+        "capital": "Athens",
+        "count": 3,
+        "coordinates": [
+            39.0,
+            22.0
+        ]
+    },
+    {
+        "name": "Hong Kong",
+        "country_code": "HK",
+        "capital": "City of Victoria",
+        "count": 142,
+        "coordinates": [
+            22.267,
+            114.188
+        ]
+    },
+    {
+        "name": "Croatia",
+        "country_code": "HR",
+        "capital": "Zagreb",
+        "count": 1,
+        "coordinates": [
+            45.16666666,
+            15.5
+        ]
+    },
+    {
+        "name": "Hungary",
+        "country_code": "HU",
+        "capital": "Budapest",
+        "count": 3,
+        "coordinates": [
+            47.0,
+            20.0
+        ]
+    },
+    {
+        "name": "Indonesia",
+        "country_code": "ID",
+        "capital": "Jakarta",
+        "count": 6,
+        "coordinates": [
+            -5.0,
+            120.0
+        ]
+    },
+    {
+        "name": "India",
+        "country_code": "IN",
+        "capital": "New Delhi",
+        "count": 149,
+        "coordinates": [
+            20.0,
+            77.0
+        ]
+    },
+    {
+        "name": "Ireland",
+        "country_code": "IE",
+        "capital": "Dublin",
+        "count": 154,
+        "coordinates": [
+            53.0,
+            -8.0
+        ]
+    },
+    {
+        "name": "Israel",
+        "country_code": "IL",
+        "capital": "Jerusalem",
+        "count": 3,
+        "coordinates": [
+            31.47,
+            35.13
+        ]
+    },
+    {
+        "name": "Italy",
+        "country_code": "IT",
+        "capital": "Rome",
+        "count": 23,
+        "coordinates": [
+            42.83333333,
+            12.83333333
+        ]
+    },
+    {
+        "name": "Jersey",
+        "country_code": "JE",
+        "capital": "Saint Helier",
+        "count": 2,
+        "coordinates": [
+            49.25,
+            -2.16666666
+        ]
+    },
+    {
+        "name": "Japan",
+        "country_code": "JP",
+        "capital": "Tokyo",
+        "count": 34,
+        "coordinates": [
+            36.0,
+            138.0
+        ]
+    },
+    {
+        "name": "South Korea",
+        "country_code": "KR",
+        "capital": "Seoul",
+        "count": 43,
+        "coordinates": [
+            37.0,
+            127.5
+        ]
+    },
+    {
+        "name": "Lithuania",
+        "country_code": "LT",
+        "capital": "Vilnius",
+        "count": 10,
+        "coordinates": [
+            56.0,
+            24.0
+        ]
+    },
+    {
+        "name": "Mexico",
+        "country_code": "MX",
+        "capital": "Mexico City",
+        "count": 3,
+        "coordinates": [
+            23.0,
+            -102.0
+        ]
+    },
+    {
+        "name": "Malta",
+        "country_code": "MT",
+        "capital": "Valletta",
+        "count": 4,
+        "coordinates": [
+            35.83333333,
+            14.58333333
+        ]
+    },
+    {
+        "name": "Myanmar",
+        "country_code": "MM",
+        "capital": "Naypyidaw",
+        "count": 1,
+        "coordinates": [
+            22.0,
+            98.0
+        ]
+    },
+    {
+        "name": "Montenegro",
+        "country_code": "ME",
+        "capital": "Podgorica",
+        "count": 1,
+        "coordinates": [
+            42.5,
+            19.3
+        ]
+    },
+    {
+        "name": "Malaysia",
+        "country_code": "MY",
+        "capital": "Kuala Lumpur",
+        "count": 1,
+        "coordinates": [
+            2.5,
+            112.5
+        ]
+    },
+    {
+        "name": "Netherlands",
+        "country_code": "NL",
+        "capital": "Amsterdam",
+        "count": 101,
+        "coordinates": [
+            52.5,
+            5.75
+        ]
+    },
+    {
+        "name": "Norway",
+        "country_code": "NO",
+        "capital": "Oslo",
+        "count": 8,
+        "coordinates": [
+            62.0,
+            10.0
+        ]
+    },
+    {
+        "name": "New Zealand",
+        "country_code": "NZ",
+        "capital": "Wellington",
+        "count": 4,
+        "coordinates": [
+            -41.0,
+            174.0
+        ]
+    },
+    {
+        "name": "Oman",
+        "country_code": "OM",
+        "capital": "Muscat",
+        "count": 1,
+        "coordinates": [
+            21.0,
+            57.0
+        ]
+    },
+    {
+        "name": "Peru",
+        "country_code": "PE",
+        "capital": "Lima",
+        "count": 1,
+        "coordinates": [
+            -10.0,
+            -76.0
+        ]
+    },
+    {
+        "name": "Poland",
+        "country_code": "PL",
+        "capital": "Warsaw",
+        "count": 22,
+        "coordinates": [
+            52.0,
+            20.0
+        ]
+    },
+    {
+        "name": "Portugal",
+        "country_code": "PT",
+        "capital": "Lisbon",
+        "count": 12,
+        "coordinates": [
+            39.5,
+            -8.0
+        ]
+    },
+    {
+        "name": "Paraguay",
+        "country_code": "PY",
+        "capital": "Asunción",
+        "count": 1,
+        "coordinates": [
+            -23.0,
+            -58.0
+        ]
+    },
+    {
+        "name": "Réunion",
+        "country_code": "RE",
+        "capital": "Saint-Denis",
+        "count": 3,
+        "coordinates": [
+            -21.15,
+            55.5
+        ]
+    },
+    {
+        "name": "Romania",
+        "country_code": "RO",
+        "capital": "Bucharest",
+        "count": 5,
+        "coordinates": [
+            46.0,
+            25.0
+        ]
+    },
+    {
+        "name": "Russia",
+        "country_code": "RU",
+        "capital": "Moscow",
+        "count": 40,
+        "coordinates": [
+            60.0,
+            100.0
+        ]
+    },
+    {
+        "name": "Singapore",
+        "country_code": "SG",
+        "capital": "Singapore",
+        "count": 67,
+        "coordinates": [
+            1.36666666,
+            103.8
+        ]
+    },
+    {
+        "name": "Serbia",
+        "country_code": "RS",
+        "capital": "Belgrade",
+        "count": 4,
+        "coordinates": [
+            44.0,
+            21.0
+        ]
+    },
+    {
+        "name": "Slovakia",
+        "country_code": "SK",
+        "capital": "Bratislava",
+        "count": 5,
+        "coordinates": [
+            48.66666666,
+            19.5
+        ]
+    },
+    {
+        "name": "Slovenia",
+        "country_code": "SI",
+        "capital": "Ljubljana",
+        "count": 8,
+        "coordinates": [
+            46.11666666,
+            14.81666666
+        ]
+    },
+    {
+        "name": "Sweden",
+        "country_code": "SE",
+        "capital": "Stockholm",
+        "count": 16,
+        "coordinates": [
+            62.0,
+            15.0
+        ]
+    },
+    {
+        "name": "Thailand",
+        "country_code": "TH",
+        "capital": "Bangkok",
+        "count": 3,
+        "coordinates": [
+            15.0,
+            100.0
+        ]
+    },
+    {
+        "name": "Turkey",
+        "country_code": "TR",
+        "capital": "Ankara",
+        "count": 3,
+        "coordinates": [
+            39.0,
+            35.0
+        ]
+    },
+    {
+        "name": "Taiwan",
+        "country_code": "TW",
+        "capital": "Taipei",
+        "count": 16,
+        "coordinates": [
+            23.5,
+            121.0
+        ]
+    },
+    {
+        "name": "Ukraine",
+        "country_code": "UA",
+        "capital": "Kiev",
+        "count": 6,
+        "coordinates": [
+            49.0,
+            32.0
+        ]
+    },
+    {
+        "name": "United States",
+        "country_code": "US",
+        "capital": "Washington D.C.",
+        "count": 950,
+        "coordinates": [
+            38.0,
+            -97.0
+        ]
+    },
+    {
+        "name": "Vietnam",
+        "country_code": "VN",
+        "capital": "Hanoi",
+        "count": 1,
+        "coordinates": [
+            16.16666666,
+            107.83333333
+        ]
+    },
+    {
+        "name": "South Africa",
+        "country_code": "ZA",
+        "capital": "Pretoria",
+        "count": 7,
+        "coordinates": [
+            -29.0,
+            24.0
+        ]
+    }
+]

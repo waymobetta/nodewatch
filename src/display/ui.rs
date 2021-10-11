@@ -66,17 +66,17 @@ where
                 resolution: MapResolution::High,
             });
             // ctx.layer();
-            for (i, n1) in app.nodes.iter().enumerate() {
-                for n2 in &app.nodes[i + 1..] {
-                    ctx.draw(&Line {
-                        x1: n1.coordinates[1],
-                        y1: n1.coordinates[0],
-                        y2: n2.coordinates[0],
-                        x2: n2.coordinates[1],
-                        color: Color::Yellow,
-                    });
-                }
-            }
+            // for (i, n1) in app.nodes.iter().enumerate() {
+            //     for n2 in &app.nodes[i + 1..] {
+            //         ctx.draw(&Line {
+            //             x1: n1.coordinates[1],
+            //             y1: n1.coordinates[0],
+            //             y2: n2.coordinates[0],
+            //             x2: n2.coordinates[1],
+            //             color: Color::Yellow,
+            //         });
+            //     }
+            // }
             for node in &app.nodes {
                 ctx.print(node.coordinates[1], node.coordinates[0], "X", Color::Green);
             }

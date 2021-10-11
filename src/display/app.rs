@@ -23,7 +23,7 @@ pub struct AggregateByCountry {
 
 pub type Nodes = Vec<Node>;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Node {
     pub name: String,

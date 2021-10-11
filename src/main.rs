@@ -34,20 +34,18 @@ fn main() -> Result<(), Box<dyn Error>> {
     // fetch node data
     let nodes: Nodes = read_node_data()?;
 
-    /*
-    let node_names = nodes
-        .iter()
-        .map(|node: &Node| node.name.as_str())
-        .collect::<Vec<&str>>();
-    */
+    let nodes_cloned = &nodes;
 
-    let node_names: Vec<&str> = Vec::new();
+    let node_names = nodes_cloned
+        .iter()
+        .map(|node| node.name.as_str())
+        .collect::<Vec<&str>>();
 
     let mut app = App::new(
         "nodewatch",
         cli.enhanced_graphics,
-        nodes,
-        node_names.to_vec(),
+        nodes_cloned.to_vec(),
+        node_names,
     );
 
     loop {

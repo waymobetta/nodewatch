@@ -1,11 +1,10 @@
-nodewatch
+### nodewatch
 
-#
+### todo:
 
-todo:
+10/11
 
 compare response from nodewatch API with static `country.json`
-- to be used more than once
 - potentially store this data in local db to avoid redundant calls
 - read db data state on render while fetching new data in background
 
@@ -29,3 +28,12 @@ vec![
     },
 ]
 ```
+
+10/15
+
+create chart for clients
+- clients.json
+- bar
+
+
+

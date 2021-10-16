@@ -4,7 +4,7 @@ use std::{error::Error, fs};
 
 pub fn read_client_data() -> Result<Clients, Box<dyn Error>> {
     let data = fs::read_to_string("clients.json")?;
-    let clients: Clients = serde_json::from_str(&data)?;
+    let clients = serde_json::from_str(&data)?;
 
     Ok(clients)
 }

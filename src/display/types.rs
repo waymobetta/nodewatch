@@ -70,5 +70,6 @@ pub struct File {
 }
 
 pub type Nodes = Vec<Node>;
-pub type Clients = Vec<AggregateByAgentName>;
+pub type Client = AggregateByAgentName;
+pub type Clients = Vec<Client>;
 pub type Countries = Vec<Country>;

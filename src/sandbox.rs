@@ -28,13 +28,13 @@ fn countries() -> Result<Countries, Box<dyn Error>> {
 
 fn read_clients() -> Result<Clients, Box<dyn Error>> {
     let data = read_to_string("clients.json")?;
-    let clients: RawClients = serde_json::from_str(&data)?;
+    let raw_clients: RawClients = serde_json::from_str(&data)?;
 
-    Ok(clients.data.aggregate_by_agent_name)
+    Ok(raw_clients.data.aggregate_by_agent_name)
 }
 
 fn print_clients() {
-    let clients: Clients = read_clients().unwrap();
+    let clients = read_clients().unwrap();
     println!("clients\n:::::::::::::\n");
     for client in clients.iter() {
         println!("name: {}, count: {}\n-----", client.name, client.count);

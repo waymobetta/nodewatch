@@ -111,9 +111,10 @@ where
         .direction(Direction::Horizontal)
         .split(area);
     let up_style = Style::default().fg(Color::Green);
-    let rows = app.nodes.iter().map(|n| {
-        Row::new(vec![n.name.clone(), n.capital.clone(), n.count.to_string()]).style(up_style)
-    });
+    let rows = app
+        .clients
+        .iter()
+        .map(|c| Row::new(vec![c.name.clone(), c.count.to_string()]).style(up_style));
     let table = Table::new(rows)
         .header(
             Row::new(vec!["name", "count"])

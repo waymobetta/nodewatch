@@ -19,10 +19,8 @@ pub struct NodesData {
 #[serde(rename_all = "camelCase")]
 pub struct AggregateByCountry {
     pub name: String,
-    pub count: i64,
+    pub count: u64,
 }
-
-pub type Nodes = Vec<Node>;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -45,7 +43,6 @@ pub struct RawClients {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientData {
-    #[serde(rename = "aggregate_by_agent_name")]
     pub aggregate_by_agent_name: Vec<AggregateByAgentName>,
 }
 
@@ -56,4 +53,22 @@ pub struct AggregateByAgentName {
     pub count: u32,
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Country {
+    pub name: String,
+    #[serde(rename = "country_code")]
+    pub country_code: String,
+    pub capital: Option<String>,
+    pub latlng: Vec<f64>,
+    pub timezones: Vec<String>,
+}
+
+#[derive(Debug)]
+pub struct File {
+    pub name: String,
+}
+
+pub type Nodes = Vec<Node>;
 pub type Clients = Vec<AggregateByAgentName>;
+pub type Countries = Vec<Country>;

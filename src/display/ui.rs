@@ -5,7 +5,7 @@ use tui::{
     style::{Color, Modifier, Style},
     symbols,
     text::{Span, Spans},
-    widgets::canvas::{Canvas, Line, Map, MapResolution},
+    widgets::canvas::{Canvas, Map, MapResolution},
     widgets::{Block, Borders, List, ListItem, Row, Table, Tabs},
     Frame,
 };
@@ -28,6 +28,7 @@ pub fn draw<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     match app.tabs.index {
         0 => draw_first_tab(f, app, chunks[1]),
         1 => draw_second_tab(f, app, chunks[1]),
+        2 => draw_third_tab(f, app, chunks[1]),
         _ => {}
     };
 }
@@ -99,4 +100,43 @@ where
         .block(Block::default().borders(Borders::ALL).title("nodes"))
         .highlight_style(Style::default().add_modifier(Modifier::BOLD));
     f.render_stateful_widget(raw_nodes, chunks[0], &mut app.raw_nodes.state);
+}
+
+fn draw_third_tab<B>(f: &mut Frame<B>, app: &mut App, area: Rect)
+where
+    B: Backend,
+{
+    let chunks = Layout::default()
+        .constraints([Constraint::Percentage(30), Constraint::Percentage(70)].as_ref())
+        .direction(Direction::Horizontal)
+        .split(area);
+    let up_style = Style::default().fg(Color::Green);
+    let rows = app.nodes.iter().map(|n| {
+        Row::new(vec![n.name.clone(), n.capital.clone(), n.count.to_string()]).style(up_style)
+    });
+    let table = Table::new(rows)
+        .header(
+            Row::new(vec!["name", "count"])
+                .style(Style::default().fg(Color::Yellow))
+                .bottom_margin(1),
+        )
+        .block(Block::default().title("clients").borders(Borders::ALL))
+        .widths(&[
+            Constraint::Length(20),
+            Constraint::Length(20),
+            Constraint::Length(20),
+        ]);
+    f.render_widget(table, chunks[0]);
+    // let chunks = Layout::default()
+    //     .direction(Direction::Vertical)
+    //     .margin(5)
+    //     .constraints([Constraint::Percentage(75), Constraint::Percentage(50)].as_ref())
+    //     .split(f.size());
+
+    // let barchart = BarChart::default()
+    //     .block(Block::Default().title("clients").borders(Borders::ALL))
+    //     .data(app.clients.as_slice())
+    //     .bar_width(10)
+    //     .bar_style(Style::default().fg(Color::Yellow))
+    //     .value_style(Style::default().fg(Color::Black).bg(Color::Yellow));
 }

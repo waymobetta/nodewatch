@@ -1,64 +1,18 @@
 #![allow(dead_code)]
+mod display;
+use crate::display::{
+    read_node_data,
+    types::{AggregateByCountry, Clients, Countries, Node, Nodes, RawClients, RawNodes},
+};
 /// sandbox is a helper crate for combining json data but may ultimately
 /// replace main.rs as the CLI root
 use clap::{App, Arg};
-use serde::{Deserialize, Serialize};
 use std::{
     error::Error,
     fs::{read_to_string, OpenOptions},
     io::Write,
     time::Instant,
 };
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct RawNodes {
-    data: Data,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct Data {
-    aggregate_by_country: Vec<AggregateByCountry>,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct AggregateByCountry {
-    name: String,
-    count: u64,
-}
-
-type Countries = Vec<Country>;
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct Country {
-    name: String,
-    #[serde(rename = "country_code")]
-    country_code: String,
-    capital: Option<String>,
-    latlng: Vec<f64>,
-    timezones: Vec<String>,
-}
-
-#[derive(Debug)]
-struct File {
-    name: String,
-}
-
-type Nodes = Vec<Node>;
-
-#[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Node {
-    pub name: String,
-    #[serde(rename = "country_code")]
-    pub country_code: String,
-    pub capital: String,
-    pub count: u64,
-    pub coordinates: Vec<f64>,
-}
 
 fn raw_nodes() -> Result<Vec<AggregateByCountry>, Box<dyn Error>> {
     let data = read_to_string("raw_nodes.json")?;
@@ -70,6 +24,37 @@ fn countries() -> Result<Countries, Box<dyn Error>> {
     let data = read_to_string("countries.json")?;
     let countries: Countries = serde_json::from_str(&data)?;
     Ok(countries)
+}
+
+fn read_clients() -> Result<Clients, Box<dyn Error>> {
+    let data = read_to_string("clients.json")?;
+    let clients: RawClients = serde_json::from_str(&data)?;
+
+    Ok(clients.data.aggregate_by_agent_name)
+}
+
+fn print_clients() {
+    let clients: Clients = read_clients().unwrap();
+    println!("clients\n:::::::::::::\n");
+    for client in clients.iter() {
+        println!("name: {}, count: {}\n-----", client.name, client.count);
+    }
+}
+
+fn print_nodes() {
+    let nodes: Nodes = read_node_data().unwrap();
+    println!("nodes: {}\n\n:::::::::::::\n", nodes.len());
+    for node in nodes {
+        println!(
+            "country: {}\ncountry_code: {}\ncapital: {}\ncount: {}\nlat_long: ({},{})\n-----",
+            node.name,
+            node.country_code,
+            node.capital,
+            node.count,
+            node.coordinates[0],
+            node.coordinates[1]
+        );
+    }
 }
 
 fn print_countries() {
@@ -130,14 +115,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .author("jon roethke <jon@chainsafe.io>")
         .about("nodewatch")
         .arg(
-            Arg::with_name("verbose")
-                .short("v")
-                .long("verbose")
-                .takes_value(false)
-                .help("prints prettified output of combining data")
-                .requires("combine"),
-        )
-        .arg(
             Arg::with_name("render")
                 .short("r")
                 .long("render")
@@ -151,12 +128,27 @@ fn main() -> Result<(), Box<dyn Error>> {
                 .takes_value(false)
                 .help("combine raw_nodes data with static country coordinates"),
         )
+        .arg(
+            Arg::with_name("clients")
+                .short("l")
+                .long("clients")
+                .takes_value(false)
+                .help("prints prettified output of clients data"),
+        )
+        .arg(
+            Arg::with_name("nodes")
+                .short("n")
+                .long("nodes")
+                .takes_value(false)
+                .help("prints prettified output of nodes data"),
+        )
         .get_matches();
 
     // flag checks
-    let verbose_flag: bool = matches.is_present("verbose");
     let render_flag: bool = matches.is_present("render");
     let combine_flag: bool = matches.is_present("combine");
+    let clients_flag: bool = matches.is_present("clients");
+    let nodes_flag: bool = matches.is_present("nodes");
 
     // check if combine selected
     if combine_flag {
@@ -179,22 +171,11 @@ fn main() -> Result<(), Box<dyn Error>> {
             println!("successfully written to file: nodes.json")
         }
 
-        // if verbose selected with combine
-        if verbose_flag {
-            println!("nodes: {}\n\n:::::::::::\n", nodes.len());
-            for node in nodes {
-                println!(
-                "country: {}\ncountry_code: {}\ncapital: {}\ncount: {}\nlat_long: ({},{})\n-----",
-                node.name,
-                node.country_code,
-                node.capital,
-                node.count,
-                node.coordinates[0],
-                node.coordinates[1]
-            );
-            }
-        }
         println!("done: {}ms", now.elapsed().as_millis());
+    } else if clients_flag {
+        print_clients();
+    } else if nodes_flag {
+        print_nodes();
     } else if render_flag {
         todo!();
     } else {

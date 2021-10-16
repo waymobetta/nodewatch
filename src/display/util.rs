@@ -1,6 +1,4 @@
 #[cfg(feature = "termion")]
-pub mod event;
-
 use rand::distributions::{Distribution, Uniform};
 use rand::rngs::ThreadRng;
 use tui::widgets::ListState;

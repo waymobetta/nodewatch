@@ -1,15 +1,12 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 mod display;
-mod util;
 
-use crate::{
-    display::{
-        read_node_data,
-        types::{Node, Nodes},
-        ui, App,
-    },
-    util::event::{Event, Events},
+use crate::display::{
+    event::{Event, Events},
+    read_client_data, read_node_data,
+    types::{Clients, Node, Nodes},
+    ui, util, App,
 };
 use argh::FromArgs;
 use std::{error::Error, io};
@@ -46,12 +43,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         .collect::<Vec<&str>>();
 
     // fetch client data
+    let clients: Clients = read_client_data()?;
 
     let mut app = App::new(
         "nodewatch",
         cli.enhanced_graphics,
         nodes_cloned.to_vec(),
         node_names,
+        clients,
     );
 
     loop {

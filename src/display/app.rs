@@ -1,9 +1,8 @@
 use crate::display::types::{Clients, Node, Nodes};
-use crate::util::{StatefulList, TabsState};
-use serde::{Deserialize, Serialize};
+use crate::display::util::{StatefulList, TabsState};
 use std::{error::Error, fs};
 
-fn read_clients() -> Result<Clients, Box<dyn Error>> {
+pub fn read_client_data() -> Result<Clients, Box<dyn Error>> {
     let data = fs::read_to_string("clients.json")?;
     let clients: Clients = serde_json::from_str(&data)?;
 
@@ -31,6 +30,7 @@ pub struct App<'a> {
     pub show_chart: bool,
     pub raw_nodes: StatefulList<&'a str>,
     pub nodes: Vec<Node>,
+    pub clients: Clients,
     pub enhanced_graphics: bool,
 }
 
@@ -40,6 +40,7 @@ impl<'a> App<'a> {
         enhanced_graphics: bool,
         nodes: Vec<Node>,
         node_names: Vec<&'a str>,
+        clients: Clients,
     ) -> App<'a> {
         App {
             title,
@@ -48,6 +49,7 @@ impl<'a> App<'a> {
             show_chart: true,
             raw_nodes: StatefulList::with_items(node_names),
             nodes: nodes,
+            clients: clients,
             enhanced_graphics,
         }
     }
@@ -73,10 +75,5 @@ impl<'a> App<'a> {
             }
             _ => {}
         }
-    }
-
-    pub fn print_nodes(&mut self) {
-        let nodes = read_node_data();
-        println!("{:?}", nodes);
     }
 }

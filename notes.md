@@ -1,15 +1,22 @@
-### nodewatch
+# nodewatch
 
-### todo:
+## todo:
+&nbsp;  
+## 10/11
 
-10/11
+&nbsp;  
+[x] compare response from nodewatch API with static `country.json`
 
-compare response from nodewatch API with static `country.json`
-- potentially store this data in local db to avoid redundant calls
-- read db data state on render while fetching new data in background
+[x] store data in static `nodes.json`
 
+[x] render data in world map
 
-nodes vector:
+[ ] store data in local db to avoid redundant calls
+
+[ ] read db data state on render while fetching new data in background
+
+&nbsp;  
+_example nodes vector:_
 ```rust
 vec![
     Node {
@@ -29,11 +36,14 @@ vec![
 ]
 ```
 
-10/15
+&nbsp;  
+## 10/15
 
-create chart for clients
-- clients.json
-- bar
+&nbsp;  
+[x] add vim support (use without arrows)
 
+[x] store clients data in static `clients.json`
+
+[ ] render data in bar chart
 
 

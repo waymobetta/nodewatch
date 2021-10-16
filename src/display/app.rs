@@ -65,6 +65,12 @@ impl<'a> App<'a> {
             'q' => {
                 self.should_quit = true;
             }
+            'h' => {
+                self.on_left();
+            }
+            'l' => {
+                self.on_right();
+            }
             _ => {}
         }
     }

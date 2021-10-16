@@ -1,7 +1,7 @@
-/// sandbox is a helper crate for combining json data but may ultimately 
-/// replace main.rs as the CLI root
-
 #![allow(dead_code)]
+
+/// sandbox is a helper crate for combining json data but may ultimately
+/// replace main.rs as the CLI root
 use clap::{App, Arg};
 use serde::{Deserialize, Serialize};
 use std::{

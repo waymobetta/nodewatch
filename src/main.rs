@@ -4,7 +4,11 @@ mod display;
 mod util;
 
 use crate::{
-    display::{read_node_data, ui, App, Node, Nodes},
+    display::{
+        read_node_data,
+        types::{Node, Nodes},
+        ui, App,
+    },
     util::event::{Event, Events},
 };
 use argh::FromArgs;
@@ -40,6 +44,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         .iter()
         .map(|node| node.name.as_str())
         .collect::<Vec<&str>>();
+
+    // fetch client data
 
     let mut app = App::new(
         "nodewatch",

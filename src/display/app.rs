@@ -1,37 +1,13 @@
+use crate::display::types::{Clients, Node, Nodes};
 use crate::util::{StatefulList, TabsState};
 use serde::{Deserialize, Serialize};
 use std::{error::Error, fs};
 
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct RawNodes {
-    pub data: Data,
-}
+fn read_clients() -> Result<Clients, Box<dyn Error>> {
+    let data = fs::read_to_string("clients.json")?;
+    let clients: Clients = serde_json::from_str(&data)?;
 
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Data {
-    pub aggregate_by_country: Vec<AggregateByCountry>,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct AggregateByCountry {
-    pub name: String,
-    pub count: i64,
-}
-
-pub type Nodes = Vec<Node>;
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct Node {
-    pub name: String,
-    #[serde(rename = "country_code")]
-    pub country_code: String,
-    pub capital: String,
-    pub count: u64,
-    pub coordinates: Vec<f64>,
+    Ok(clients)
 }
 
 pub fn read_node_data() -> Result<Nodes, Box<dyn Error>> {
@@ -68,7 +44,7 @@ impl<'a> App<'a> {
         App {
             title,
             should_quit: false,
-            tabs: TabsState::new(vec!["map", "list"]),
+            tabs: TabsState::new(vec!["map", "list", "clients"]),
             show_chart: true,
             raw_nodes: StatefulList::with_items(node_names),
             nodes: nodes,

@@ -1,7 +1,5 @@
-/// sandbox is a helper crate for combining json data but may ultimately 
+/// sandbox is a helper crate for combining json data but may ultimately
 /// replace main.rs as the CLI root
-
-#![allow(dead_code)]
 use clap::{App, Arg};
 use serde::{Deserialize, Serialize};
 use std::{
@@ -73,6 +71,7 @@ fn countries() -> Result<Countries, Box<dyn Error>> {
     Ok(countries)
 }
 
+#[allow(dead_code)]
 fn print_countries() {
     let countries: Countries = countries().unwrap();
     for country in countries.iter() {
